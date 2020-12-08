@@ -37,74 +37,74 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-	mode: 'development',
+  mode: 'development',
   entry: ['./main.ts'],
   output: {
     filename: 'main.[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
   },
 
-	plugins: [
-		new webpack.ProgressPlugin(),
-		new MiniCssExtractPlugin({ filename: 'main.[chunkhash].css' }),
-	],
+  plugins: [
+    new webpack.ProgressPlugin(),
+    new MiniCssExtractPlugin({filename: 'main.[chunkhash].css'}),
+  ],
 
-	module: {
-		rules: [
-			{
-				test: /\.(ts|tsx)$/,
-				loader: 'ts-loader',
-				include: [path.resolve(__dirname, 'src')],
-				exclude: [/node_modules/],
-			},
-			{
-				test: /.(scss|css)$/,
+  module: {
+    rules: [
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader',
+        include: [path.resolve(__dirname, 'src')],
+        exclude: [/node_modules/],
+      },
+      {
+        test: /.(scss|css)$/,
 
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-					},
-					{
-						loader: 'style-loader',
-					},
-					{
-						loader: 'css-loader',
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
 
-						options: {
-							sourceMap: true,
-						},
-					},
-					{
-						loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
 
-						options: {
-							sourceMap: true,
-						},
-					},
-				],
-			},
-		],
-	},
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
 
-	resolve: {
-		extensions: ['.tsx', '.ts', '.js'],
-	},
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
 
-	optimization: {
-		minimizer: [new TerserPlugin()],
+  optimization: {
+    minimizer: [new TerserPlugin()],
 
-		splitChunks: {
-			cacheGroups: {
-				vendors: {
-					priority: -10,
-					test: /[\\/]node_modules[\\/]/,
-				},
-			},
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          priority: -10,
+          test: /[\\/]node_modules[\\/]/,
+        },
+      },
 
-			chunks: 'async',
-			minChunks: 1,
-			minSize: 30000,
-			name: false,
-		},
-	},
+      chunks: 'async',
+      minChunks: 1,
+      minSize: 30000,
+      name: false,
+    },
+  },
 };
