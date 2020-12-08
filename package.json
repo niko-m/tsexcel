@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "tsexcel",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niko-m/tsexcel.git"
+  },
+  "keywords": [],
+  "author": "Niko M <goodguyniko@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niko-m/tsexcel/issues"
+  },
+  "homepage": "https://github.com/niko-m/tsexcel#readme"
+}
