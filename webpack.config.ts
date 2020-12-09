@@ -52,6 +52,7 @@ const config: webpack.Configuration = {
     new MiniCssExtractPlugin({filename: 'main.[chunkhash].css'}),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'template.html'),
+      favicon: path.resolve(__dirname, 'src', 'favicon.ico'),
       filename: 'index.html',
     }),
   ],
