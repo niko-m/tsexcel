@@ -8,7 +8,7 @@ const commonConfig: webpack.Configuration = {
   context: path.resolve(__dirname, 'src'),
   entry: ['./main.ts'],
   output: {
-    filename: 'main.[hash].js',
+    filename: 'main.[fullhash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '',
   },

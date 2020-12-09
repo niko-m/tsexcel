@@ -9,7 +9,7 @@ const prodConfig: webpack.Configuration = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'main.[hash].css',
+      filename: 'main.[fullhash].css',
     }),
   ],
 
