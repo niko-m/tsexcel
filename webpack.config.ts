@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ESLintPlugin from 'eslint-webpack-plugin';
 
 /*
  * SplitChunksPlugin is enabled by default and replaced
@@ -37,9 +38,11 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 import TerserPlugin from 'terser-webpack-plugin';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const config: webpack.Configuration = {
   context: path.resolve(__dirname, 'src'),
-  mode: 'development',
+  mode: isProd ? 'production' : 'development',
   entry: ['./main.ts'],
   output: {
     filename: 'main.[chunkhash].js',
@@ -49,11 +52,16 @@ const config: webpack.Configuration = {
   plugins: [
     new webpack.ProgressPlugin({}),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({filename: 'main.[chunkhash].css'}),
+    new MiniCssExtractPlugin({
+      filename: 'main.[chunkhash].css',
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'template.html'),
       favicon: path.resolve(__dirname, 'src', 'favicon.ico'),
       filename: 'index.html',
+    }),
+    new ESLintPlugin({
+      extensions: ['ts'],
     }),
   ],
 
@@ -67,29 +75,31 @@ const config: webpack.Configuration = {
       },
       {
         test: /.(scss|css)$/,
-
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: 'style-loader',
-          },
-          {
             loader: 'css-loader',
-
             options: {
               sourceMap: true,
             },
           },
           {
             loader: 'sass-loader',
-
             options: {
               sourceMap: true,
             },
           },
         ],
+      },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: 'asset/inline',
       },
     ],
   },
