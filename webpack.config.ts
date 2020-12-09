@@ -41,19 +41,22 @@ import TerserPlugin from 'terser-webpack-plugin';
 const isProd = process.env.NODE_ENV === 'production';
 
 const config: webpack.Configuration = {
-  context: path.resolve(__dirname, 'src'),
   mode: isProd ? 'production' : 'development',
+  devtool: isProd ? false : 'source-map',
+
+  context: path.resolve(__dirname, 'src'),
   entry: ['./main.ts'],
   output: {
-    filename: 'main.[chunkhash].js',
+    filename: 'main.[hash].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '',
   },
 
   plugins: [
     new webpack.ProgressPlugin({}),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'main.[chunkhash].css',
+      filename: 'main.[hash].css',
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'template.html'),
@@ -63,6 +66,7 @@ const config: webpack.Configuration = {
     new ESLintPlugin({
       extensions: ['ts'],
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 
   module: {
@@ -75,31 +79,21 @@ const config: webpack.Configuration = {
       },
       {
         test: /.(scss|css)$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-        type: 'asset/resource',
+        test: /\.(ico|gif|png|jpg|jpeg)$/i,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'images',
+        },
       },
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-        type: 'asset/inline',
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'fonts',
+        },
       },
     ],
   },
@@ -124,6 +118,14 @@ const config: webpack.Configuration = {
       minSize: 30000,
       name: false,
     },
+  },
+
+  devServer: {
+    host: 'localhost',
+    port: 3000,
+    historyApiFallback: true,
+    compress: true,
+    hot: true,
   },
 };
 

@@ -1,1 +1,2 @@
-export const greetings: string = 'Hello world!';
+const greeting: string = 'Hello world!';
+export default greeting;
