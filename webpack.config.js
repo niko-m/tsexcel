@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 /*
  * SplitChunksPlugin is enabled by default and replaced
@@ -46,6 +47,7 @@ module.exports = {
 
   plugins: [
     new webpack.ProgressPlugin(),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({filename: 'main.[chunkhash].css'}),
   ],
 
