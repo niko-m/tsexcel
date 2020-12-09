@@ -1,6 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+import path from 'path';
+import webpack from 'webpack';
+import {CleanWebpackPlugin} from 'clean-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 /*
  * SplitChunksPlugin is enabled by default and replaced
@@ -24,7 +25,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
  *
  */
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 /*
  * We've enabled TerserPlugin for you! This minifies your app
@@ -34,9 +35,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
  *
  */
 
-const TerserPlugin = require('terser-webpack-plugin');
+import TerserPlugin from 'terser-webpack-plugin';
 
-module.exports = {
+const config: webpack.Configuration = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
   entry: ['./main.ts'],
@@ -46,9 +47,13 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.ProgressPlugin(),
+    new webpack.ProgressPlugin({}),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({filename: 'main.[chunkhash].css'}),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src', 'template.html'),
+      filename: 'index.html',
+    }),
   ],
 
   module: {
@@ -110,3 +115,5 @@ module.exports = {
     },
   },
 };
+
+export default config;
