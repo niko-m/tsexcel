@@ -11,24 +11,13 @@ const devConfig: webpack.Configuration = {
     new ESLintPlugin({
       extensions: ['ts'],
     }),
-    new webpack.HotModuleReplacementPlugin(),
   ],
-
-  module: {
-    rules: [
-      {
-        test: /.(scss|css)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
-    ],
-  },
 
   devServer: {
     host: 'localhost',
     port: 3000,
     historyApiFallback: true,
     compress: true,
-    hot: true,
   },
 };
 

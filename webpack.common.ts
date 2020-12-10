@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const commonConfig: webpack.Configuration = {
   context: path.resolve(__dirname, 'src'),
@@ -21,6 +22,9 @@ const commonConfig: webpack.Configuration = {
       favicon: path.resolve(__dirname, 'src', 'favicon.ico'),
       filename: 'index.html',
     }),
+    new MiniCssExtractPlugin({
+      filename: 'main.[fullhash].css',
+    }),
   ],
 
   module: {
@@ -30,6 +34,10 @@ const commonConfig: webpack.Configuration = {
         loader: 'ts-loader',
         include: [path.resolve(__dirname, 'src')],
         exclude: [/node_modules/],
+      },
+      {
+        test: /.(scss|css)$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(ico|gif|png|jpg|jpeg)$/i,
