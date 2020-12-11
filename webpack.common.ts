@@ -14,6 +14,16 @@ const commonConfig: webpack.Configuration = {
     publicPath: '',
   },
 
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@assets': path.resolve(__dirname, 'src', 'assets'),
+      '@core': path.resolve(__dirname, 'src', 'core'),
+      '@types': path.resolve(__dirname, 'types'),
+    },
+  },
+
   plugins: [
     new webpack.ProgressPlugin({}),
     new CleanWebpackPlugin(),
@@ -54,10 +64,6 @@ const commonConfig: webpack.Configuration = {
         },
       },
     ],
-  },
-
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
   },
 
   optimization: {
