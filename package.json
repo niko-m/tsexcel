@@ -5,8 +5,8 @@
   "description": "TypeScript Excel",
   "main": "src/main.ts",
   "scripts": {
-    "lint": "eslint src",
-    "fix": "eslint src --fix",
+    "lint": "eslint",
+    "fix": "eslint --fix",
     "serve": "cross-env NODE_ENV=development TS_NODE_PROJECT=webpack.tsconfig.json webpack serve --config webpack.dev.ts",
     "build": "cross-env NODE_ENV=development TS_NODE_PROJECT=webpack.tsconfig.json webpack --config webpack.dev.ts",
     "build:prod": "cross-env NODE_ENV=production TS_NODE_PROJECT=webpack.tsconfig.json webpack --config webpack.prod.ts"
