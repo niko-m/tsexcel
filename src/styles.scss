@@ -1,3 +1,4 @@
+@import '~normalize.css';
 @import '~fontsource-roboto/index.css';
 
 body {
@@ -6,4 +7,9 @@ body {
 
 h1 {
   font-style: italic;
+}
+
+#root {
+  margin: auto;
+  width: fit-content;
 }
