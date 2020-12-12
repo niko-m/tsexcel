@@ -20,7 +20,7 @@ export default class App {
 
     const text = document.createElement('p');
     text.innerText =
-        'All waters deep. Itself. Over. Sixth, you upon, grass bearing.';
+      'All waters deep. Itself. Over. Sixth, you upon, grass bearing.';
     this.root.appendChild(text);
 
     const img = document.createElement('img');
