@@ -36,6 +36,9 @@ const commonConfig: webpack.Configuration = {
     new MiniCssExtractPlugin({
       filename: 'main.[fullhash].css',
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    }),
   ],
 
   module: {
