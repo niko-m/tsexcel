@@ -1,0 +1,15 @@
+@import '~normalize.css';
+@import '~fontsource-roboto/index.css';
+
+body {
+  font-family: 'Roboto', 'Times New Roman', Times, sans-serif;
+}
+
+h1 {
+  font-style: italic;
+}
+
+#root {
+  margin: auto;
+  width: fit-content;
+}
