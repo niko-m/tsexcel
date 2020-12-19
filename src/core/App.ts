@@ -1,4 +1,4 @@
-import {logo} from '@/assets/images';
+import { logo } from '@/assets/images';
 
 /**
  * Main application class.
@@ -19,8 +19,7 @@ export default class App {
     this.root.appendChild(header);
 
     const text = document.createElement('p');
-    text.innerText =
-      'All waters deep. Itself. Over. Sixth, you upon, grass bearing.';
+    text.innerText = 'All waters deep. Itself. Over. Sixth, you upon, grass bearing.';
     this.root.appendChild(text);
 
     const img = document.createElement('img');

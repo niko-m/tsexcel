@@ -5,19 +5,29 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
-    "google"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "airbnb-typescript/base"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "project": [
+      "tsconfig.json"
+    ],
     "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": [
     "@typescript-eslint"
   ],
-  "rules": {
-    "require-jsdoc": "off",
-    "valid-jsdoc": "off"
-  }
+  "overrides": [
+    {
+      "files": [
+        "webpack.*.ts"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ]
 }

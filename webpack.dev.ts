@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import ESLintPlugin from 'eslint-webpack-plugin';
-import {merge} from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import commonConfig from './webpack.common';
 
 const devConfig: webpack.Configuration = {
